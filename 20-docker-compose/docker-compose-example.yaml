@@ -1,0 +1,22 @@
+version: '3'
+# this name will be useful for (e.g.) "docker compose -p"
+name: golang-routing
+
+services:
+  golang:
+    # This will expose golang app on port 10081 on docker host
+    ports:
+      - '10081:8080'
+    build:
+      # Since docker-compose.yaml is moved to parent directory
+      # (see "directory structure" in "README.md"), "context" is not "."
+      # anymore
+      context: ./golang
+      # dockerfile location is relative to context
+      dockerfile: Dockerfile
+    environment:
+      # Listen on all ipv4 interfaces
+      - HOST=0.0.0.0
+      # Original port in "ports" above. It also needs to be EXPOSE-d
+      # in Dockerfile
+      - PORT=8080

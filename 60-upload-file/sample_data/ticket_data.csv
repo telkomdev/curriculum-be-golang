@@ -1,0 +1,15 @@
+from,to,price,departureTime
+Jakarta,Bandung,200000,09:00:00
+Bandung,Jakarta,100000,09:00:00
+Jakarta,Semarang,200000,10:00:00
+Semarang,Jakarta,200000,10:00:00
+Jakarta,Surabaya,300000,11:00:00
+Surabaya,Jakarta,300000,11:00:00
+Jakarta,Yogyakarta,250000,12:00:00
+Yogyakarta,Jakarta,250000,12:00:00
+Jakarta,Solo,225000,13:00:00
+Solo,Jakarta,225000,13:00:00
+Bandung,Semarang,175000,14:00:00
+Semarang,Bandung,175000,14:00:00
+Semarang,Surabaya,200000,15:00:00
+Surabaya,Bandung,250000,16:00:00

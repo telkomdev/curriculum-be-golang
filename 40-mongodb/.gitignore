@@ -1,0 +1,5 @@
+# Most editor use configuration
+.idea/
+.vscode/
+docker-compose.yaml
+mongo/

@@ -1,0 +1,1283 @@
+definitions:
+  models.AllBookings:
+    properties:
+      count:
+        example: 1
+        type: integer
+      currentPage:
+        example: 1
+        type: integer
+      data:
+        items:
+          $ref: '#/definitions/models.Booking'
+        type: array
+      totalCount:
+        example: 1000
+        type: integer
+      totalPages:
+        example: 10
+        type: integer
+    type: object
+  models.AllRoutes:
+    properties:
+      count:
+        example: 1
+        type: integer
+      currentPage:
+        example: 1
+        type: integer
+      data:
+        items:
+          $ref: '#/definitions/models.Route'
+        type: array
+      totalCount:
+        example: 1000
+        type: integer
+      totalPages:
+        example: 10
+        type: integer
+    type: object
+  models.AllUsers:
+    properties:
+      count:
+        example: 1
+        type: integer
+      currentPage:
+        example: 1
+        type: integer
+      data:
+        items:
+          $ref: '#/definitions/models.User'
+        type: array
+      totalCount:
+        example: 1000
+        type: integer
+      totalPages:
+        example: 10
+        type: integer
+    type: object
+  models.Booking:
+    properties:
+      _id:
+        example: 6336185fc31ad7ad4022ab87
+        type: string
+      createdAt:
+        example: "2022-09-30T05:12:47.469Z"
+        type: string
+      departureTime:
+        example: "2022-09-30T05:12:47.469Z"
+        type: string
+      paymentStatus:
+        example: 0
+        type: integer
+      quantity:
+        example: 1
+        type: integer
+      tickets:
+        items:
+          $ref: '#/definitions/models.Ticket'
+        type: array
+      totalPrice:
+        example: 500000
+        type: number
+      updatedAt:
+        example: "2022-09-30T05:12:47.469Z"
+        type: string
+      user:
+        $ref: '#/definitions/models.BookingUser'
+    type: object
+  models.BookingEditRequest:
+    properties:
+      _id:
+        example: 6336185fc31ad7ad4022ab87
+        type: string
+    required:
+    - _id
+    type: object
+  models.BookingUser:
+    properties:
+      _id:
+        example: 6336185fc31ad7ad4022ab87
+        type: string
+      email:
+        example: user@email.com
+        type: string
+      name:
+        example: Regular User
+        type: string
+    type: object
+  models.CreateBookingRequest:
+    properties:
+      quantity:
+        example: 1
+        type: integer
+      routeId:
+        example: 633c692ac31ad7ad4062d0fd
+        type: string
+      scheduleDate:
+        example: "2022-10-01"
+        type: string
+    required:
+    - quantity
+    - routeId
+    - scheduleDate
+    type: object
+  models.CreateRouteRequest:
+    properties:
+      departureTime:
+        example: "09:00:00"
+        type: string
+      from:
+        example: Malang
+        type: string
+      price:
+        example: 200000
+        type: number
+      to:
+        example: Jakarta
+        type: string
+    required:
+    - departureTime
+    - from
+    - price
+    - to
+    type: object
+  models.CreateTicketRequest:
+    properties:
+      bookingId:
+        example: 6336185fc31ad7ad4022ab87
+        type: string
+      departureTime:
+        example: "2022-10-01T12:00:00.000Z"
+        type: string
+      from:
+        example: Malang
+        type: string
+      price:
+        example: 200000
+        type: number
+      to:
+        example: Jakarta
+        type: string
+      userId:
+        example: 632169497f0236bfb3e854754
+        type: string
+    required:
+    - departureTime
+    - from
+    - price
+    - to
+    type: object
+  models.ErrorBookingPaymentStatusValidation:
+    properties:
+      error:
+        example: true
+        type: boolean
+      message:
+        example: Error, complete payment only can be done when payment status is 0
+          (Created)
+        type: string
+    type: object
+  models.ErrorCreateRouteValidation:
+    properties:
+      error:
+        example: true
+        type: boolean
+      message:
+        example: Field from, to, price, departureTime cannot be empty!
+        type: string
+    type: object
+  models.ErrorCreateTicketValidation:
+    properties:
+      error:
+        example: true
+        type: boolean
+      message:
+        example: Field from, to, userId, price, bookingId, departureTime cannot be
+          empty!
+        type: string
+    type: object
+  models.ErrorEmailNotValid:
+    properties:
+      error:
+        example: true
+        type: boolean
+      message:
+        example: 'User validation failed: email: Please enter a valid email'
+        type: string
+    type: object
+  models.ErrorMongoDBGet:
+    properties:
+      error:
+        example: true
+        type: boolean
+      message:
+        example: failed to get data from mongodb, {error}
+        type: string
+    type: object
+  models.ErrorMongoDBUpset:
+    properties:
+      error:
+        example: true
+        type: boolean
+      message:
+        example: failed to insert or update data to mongodb, {error}
+        type: string
+    type: object
+  models.ErrorRouteNotFound:
+    properties:
+      error:
+        example: true
+        type: boolean
+      message:
+        example: Route Not Found!
+        type: string
+    type: object
+  models.ErrorUpdateRouteValidation:
+    properties:
+      error:
+        example: true
+        type: boolean
+      message:
+        example: Field price, departureTime cannot be empty!
+        type: string
+    type: object
+  models.ErrorUserNotFound:
+    properties:
+      error:
+        example: true
+        type: boolean
+      message:
+        example: User Not Found!
+        type: string
+    type: object
+  models.ErrorWrongSecretKey:
+    properties:
+      error:
+        example: true
+        type: boolean
+      message:
+        example: No secret-key provided or wrong secret-key!
+        type: string
+    type: object
+  models.ResponseRoot:
+    properties:
+      error:
+        example: false
+        type: boolean
+      message:
+        example: This is ticketing app.
+        type: string
+    type: object
+  models.Role:
+    properties:
+      _id:
+        example: 6336185fc31ad7ad4022ab87
+        type: string
+      name:
+        example: admin
+        type: string
+    type: object
+  models.Route:
+    properties:
+      _id:
+        example: 633c692ac31ad7ad4062d0fd
+        type: string
+      createdAt:
+        example: "2022-09-30T05:12:47.469Z"
+        type: string
+      departureTime:
+        example: "09:00:00"
+        type: string
+      from:
+        example: Malang
+        type: string
+      price:
+        example: 200000
+        type: number
+      to:
+        example: Jakarta
+        type: string
+      updatedAt:
+        example: "2022-09-30T05:12:47.469Z"
+        type: string
+    type: object
+  models.RouteEditResponseSuccess:
+    properties:
+      message:
+        example: Route was updated successfully!
+        type: string
+    type: object
+  models.RouteImportResponseSuccess:
+    properties:
+      message:
+        example: Route data has successfully imported!
+        type: string
+    type: object
+  models.Ticket:
+    properties:
+      _id:
+        example: 6336185fc31ad7ad4022ab87
+        type: string
+      bookingId:
+        example: 6336185fc31ad7ad4022ab87
+        type: string
+      createdAt:
+        example: "2022-09-30T05:12:47.469Z"
+        type: string
+      departureTime:
+        example: "2022-10-01T12:00:00.000Z"
+        type: string
+      from:
+        example: Malang
+        type: string
+      price:
+        example: 200000
+        type: number
+      to:
+        example: Jakarta
+        type: string
+      updatedAt:
+        example: "2022-09-30T05:12:47.469Z"
+        type: string
+      userId:
+        example: 632169497f0236bfb3e85412
+        type: string
+    required:
+    - departureTime
+    - from
+    - price
+    - to
+    type: object
+  models.TicketDeleteResponseSuccess:
+    properties:
+      message:
+        example: Ticket with id 631ea95d0770f442fd692fa8 was deleted successfully!
+        type: string
+    type: object
+  models.TicketEditResponseSuccess:
+    properties:
+      message:
+        example: Ticket was updated successfully!
+        type: string
+    type: object
+  models.Unauthorized:
+    properties:
+      error:
+        example: true
+        type: boolean
+      message:
+        example: Unauthorized
+        type: string
+    type: object
+  models.UpdateRouteRequest:
+    properties:
+      departureTime:
+        example: "09:00:00"
+        type: string
+      price:
+        example: 200000
+        type: number
+    required:
+    - departureTime
+    - price
+    type: object
+  models.User:
+    properties:
+      _id:
+        example: 6336185fc31ad7ad4022ab87
+        type: string
+      createdAt:
+        example: "2022-09-30T05:12:47.469Z"
+        type: string
+      email:
+        example: john.doe@email.com
+        type: string
+      name:
+        example: John Doe
+        type: string
+      roles:
+        items:
+          $ref: '#/definitions/models.Role'
+        type: array
+      updatedAt:
+        example: "2022-09-30T05:12:47.469Z"
+        type: string
+    type: object
+  models.UserAuthRequest:
+    properties:
+      email:
+        example: root@email.com
+        type: string
+      password:
+        example: "123456"
+        type: string
+    type: object
+  models.UserAuthResponse:
+    properties:
+      _id:
+        example: 6336185fc31ad7ad4022ab87
+        type: string
+      accessToken:
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTA2NTQyNjgsIm5iZiI6MTY2NDczNDI2OCwiaWF0IjoxNjY0NzM0MjY4LCJ1c2VySWQiOiI2MzM5Yzg4ZmMzMDMwZjNmM2RmMjUwNGUiLCJ1c2VyUm9sZXMiOlsiYWRtaW4iXX0.DKxQzeaLna3H8MS55nQ2p96KPA_LS3bHhoIrqcNaODQ
+        type: string
+      email:
+        example: john.doe@email.com
+        type: string
+      name:
+        example: John Doe
+        type: string
+      roles:
+        items:
+          $ref: '#/definitions/models.Role'
+        type: array
+    type: object
+  models.UserCreateRequest:
+    properties:
+      email:
+        example: root@email.com
+        type: string
+      name:
+        example: Administrator
+        type: string
+      password:
+        example: "123456"
+        type: string
+    type: object
+  models.UserCreateResponseSuccess:
+    properties:
+      message:
+        example: User was registered successfully!
+        type: string
+    type: object
+  models.UserDeleteResponseSuccess:
+    properties:
+      message:
+        example: User with id 631ea95d0770f442fd692fa8 was deleted successfully!
+        type: string
+    type: object
+  models.UserEditRequest:
+    properties:
+      name:
+        example: John Doe
+        type: string
+    type: object
+  models.UserEditResponseSuccess:
+    properties:
+      message:
+        example: User was updated successfully!
+        type: string
+    type: object
+host: localhost:8000
+info:
+  contact: {}
+  description: This ticketing API have feature to manage user, manage route, manage
+    booking. This application developed by using stack Golang, JWT, MongoDB.
+  title: Ticketing App API
+  version: "1.0"
+paths:
+  /:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseRoot'
+      summary: Response this request with Hello Route.
+      tags:
+      - Root
+  /api/v1/booking:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Query data by page number
+        in: query
+        name: page
+        type: integer
+      - description: Limit size per page
+        in: query
+        name: size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.AllBookings'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.Unauthorized'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorMongoDBGet'
+      security:
+      - BearerAuth: []
+      summary: Get all bookings, this feature need Role Admin.
+      tags:
+      - Booking
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: request data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateBookingRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Booking'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorRouteNotFound'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.Unauthorized'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorMongoDBUpset'
+      security:
+      - BearerAuth: []
+      summary: Create new booking
+      tags:
+      - Booking
+  /api/v1/booking/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Booking id to search
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Booking'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.Unauthorized'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorMongoDBGet'
+      security:
+      - BearerAuth: []
+      summary: Get booking by id.
+      tags:
+      - Booking
+  /api/v1/booking/cancel:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: request data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.BookingEditRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Booking'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.Unauthorized'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorBookingPaymentStatusValidation'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorMongoDBUpset'
+      security:
+      - BearerAuth: []
+      summary: Update payment status to 2 (cancelled), this feature need Role Admin
+      tags:
+      - Booking
+  /api/v1/booking/complete:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: request data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.BookingEditRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Booking'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.Unauthorized'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorBookingPaymentStatusValidation'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorMongoDBUpset'
+      security:
+      - BearerAuth: []
+      summary: Update payment status to 1 (completed), this feature need Role Admin
+      tags:
+      - Booking
+  /api/v1/route:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: query to search filter by 'from' location
+        in: query
+        name: from
+        type: string
+      - description: query to search filter by 'to' location
+        in: query
+        name: to
+        type: string
+      - description: Query data by page number
+        in: query
+        name: page
+        type: integer
+      - description: Limit size per page
+        in: query
+        name: size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.AllRoutes'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.Unauthorized'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorMongoDBGet'
+      security:
+      - BearerAuth: []
+      summary: Find all route, or find route with filter by from location or to location.
+      tags:
+      - Route
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: request data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateRouteRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Route'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorCreateRouteValidation'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.Unauthorized'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorMongoDBUpset'
+      security:
+      - BearerAuth: []
+      summary: Create new route, this feature need Role Admin.
+      tags:
+      - Route
+  /api/v1/route/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Route id to search
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Route'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.Unauthorized'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorMongoDBGet'
+      security:
+      - BearerAuth: []
+      summary: Get route by id.
+      tags:
+      - Route
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Route id to update
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: request data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateRouteRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.RouteEditResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorUpdateRouteValidation'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.Unauthorized'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorMongoDBGet'
+      security:
+      - BearerAuth: []
+      summary: Update route by id.
+      tags:
+      - Route
+  /api/v1/route/import:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: CSV route file to import
+        in: formData
+        name: routeFile
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.RouteImportResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorCreateRouteValidation'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.Unauthorized'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorMongoDBUpset'
+      security:
+      - BearerAuth: []
+      summary: Import Ticketing Route CSV file to App server, this feature only accessible
+        by role admin.
+      tags:
+      - Route
+  /api/v1/ticket:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: query to search filter by 'from' location
+        in: query
+        name: from
+        type: string
+      - description: query to search filter by 'to' location
+        in: query
+        name: to
+        type: string
+      - description: query to search filter by 'userId' location
+        in: query
+        name: userId
+        type: string
+      - description: query to search filter by 'bookingId' location
+        in: query
+        name: bookingId
+        type: string
+      - description: Query data by page number
+        in: query
+        name: page
+        type: integer
+      - description: Limit size per page
+        in: query
+        name: size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.AllRoutes'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.Unauthorized'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorMongoDBGet'
+      security:
+      - BearerAuth: []
+      summary: Find all ticket, or find route with filter by from, to, userId, bookingId.
+      tags:
+      - Ticket
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: request data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateTicketRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Ticket'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorCreateTicketValidation'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.Unauthorized'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorMongoDBUpset'
+      security:
+      - BearerAuth: []
+      summary: Create new ticket.
+      tags:
+      - Ticket
+  /api/v1/ticket/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: Ticket id to delete
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TicketDeleteResponseSuccess'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.Unauthorized'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorMongoDBUpset'
+      security:
+      - BearerAuth: []
+      summary: Delete ticket by id
+      tags:
+      - Ticket
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Ticket id to search
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Ticket'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.Unauthorized'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorMongoDBGet'
+      security:
+      - BearerAuth: []
+      summary: Get ticket by id.
+      tags:
+      - Ticket
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Ticket id to update
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: request data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateTicketRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TicketEditResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorCreateTicketValidation'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.Unauthorized'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorMongoDBUpset'
+      security:
+      - BearerAuth: []
+      summary: Update ticket by id.
+      tags:
+      - Ticket
+  /api/v1/user:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Name to search
+        in: query
+        name: name
+        type: string
+      - description: Query data by page number
+        in: query
+        name: page
+        type: integer
+      - description: Limit size per page
+        in: query
+        name: size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.AllUsers'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.Unauthorized'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorMongoDBGet'
+      security:
+      - BearerAuth: []
+      summary: Get all user and search all user by name, this endpoint only available
+        for role admin.
+      tags:
+      - User
+  /api/v1/user/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: User id to delete
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UserDeleteResponseSuccess'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.Unauthorized'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorMongoDBUpset'
+      security:
+      - BearerAuth: []
+      summary: Delete user by id, this feature need Role Admin.
+      tags:
+      - User
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: User id to search
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.Unauthorized'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorMongoDBGet'
+      security:
+      - BearerAuth: []
+      summary: Find user by id, this feature need role admin.
+      tags:
+      - User
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: User id to edit
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: request data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserEditRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UserEditResponseSuccess'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.Unauthorized'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorMongoDBUpset'
+      security:
+      - BearerAuth: []
+      summary: Update user by id, this feature need Role Admin.
+      tags:
+      - User
+  /api/v1/user/auth:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: request data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserAuthRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UserAuthResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorUserNotFound'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.Unauthorized'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorMongoDBGet'
+      summary: Login user.
+      tags:
+      - User
+  /api/v1/user/create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: request data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UserCreateResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorEmailNotValid'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.Unauthorized'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorMongoDBUpset'
+      security:
+      - BearerAuth: []
+      summary: Create new user, need role admin bearer token.
+      tags:
+      - User
+  /api/v1/user/create/admin:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Your super admin secret-key
+        in: header
+        name: secret-key
+        required: true
+        type: string
+      - description: request data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UserCreateResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorEmailNotValid'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/models.ErrorWrongSecretKey'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorMongoDBUpset'
+      summary: Create new user admin, need super admin secret key.
+      tags:
+      - User
+  /api/v1/user/me:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.Unauthorized'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorMongoDBGet'
+      security:
+      - BearerAuth: []
+      summary: Get current login user profile.
+      tags:
+      - User
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

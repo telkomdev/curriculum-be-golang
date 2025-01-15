@@ -1,0 +1,42 @@
+version: '3'
+# this name will be useful for (e.g.) "docker compose -p"
+name: golang-mongodb
+
+volumes:
+  mongodb-dev-storage:
+
+services:
+  mongodb:
+    image: mongo:4.4
+    ports:
+      - '10017:27017'
+    # Where to store mongodb data.
+    volumes:
+      - mongodb-dev-storage:/data/db
+    environment:
+      # When using this docker-compose.yaml, MONGO_INITDB_ROOT_USERNAME
+      # must be the same as MONGODB_USER on "golang" service.
+      - MONGO_INITDB_ROOT_USERNAME=root
+      # When using this docker-compose.yaml, MONGO_INITDB_ROOT_PASSWORD
+      # must be the same as MONGODB_PASS on "golang" service.
+      - MONGO_INITDB_ROOT_PASSWORD=devtestpassword
+
+  golang:
+    # This will expose golang app on port 10081 on docker host
+    ports:
+      - '8000:8000'
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      # Listen on all ipv4 interfaces
+      # Original port in "ports" above. It also needs to be EXPOSE-d
+      # in Dockerfile
+      - ADDRESS=0.0.0.0:8000
+      # Must be the same with MONGO_INITDB_ROOT_USERNAME on "mongodb" services
+      - MONGO_USERNAME=root
+      # Must be the same with MONGO_INITDB_ROOT_PASSWORD on "mongodb" services
+      - MONGO_PASSWORD=devtestpassword
+      - MONGO_HOST=mongodb
+      - MONGO_PORT=27017
+      - MONGO_DBNAME=default_database

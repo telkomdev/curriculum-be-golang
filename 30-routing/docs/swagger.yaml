@@ -1,0 +1,28 @@
+definitions:
+  models.ResponseRoot:
+    properties:
+      error:
+        example: false
+        type: boolean
+      message:
+        example: Hello. Try GET to /api/v1/item
+        type: string
+    type: object
+host: localhost:8000
+info:
+  contact: {}
+  description: Example of routing with golang, adding GET and POST route
+  title: 30-routing
+  version: "1.0"
+paths:
+  /:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseRoot'
+      summary: Response this request with Hello Route.
+      tags:
+      - Root
+swagger: "2.0"

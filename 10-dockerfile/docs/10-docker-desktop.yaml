@@ -1,0 +1,20 @@
+openapi: '3.0.2'
+info:
+  description: '## A basic go webapp, packed as docker container' 
+  version: 1.0.0
+  title: 10-Docker-Desktop
+servers:
+  - url: http://localhost:10081
+paths: 
+  /:
+    get:
+      summary: Response this request with Hello World
+      description: ""
+      responses:
+        "200":
+          description: Success
+          content:
+            text/html: 
+              schema: 
+                type: string
+                example: "Hello World"

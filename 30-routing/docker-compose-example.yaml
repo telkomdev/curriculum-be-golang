@@ -1,0 +1,17 @@
+version: '3'
+# this name will be useful for (e.g.) "docker compose -p"
+name: golang-routing
+
+services:
+  golang:
+    # This will expose golang app on port 10081 on docker host
+    ports:
+      - '8000:8000'
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      # Listen on all ipv4 interfaces
+      # Original port in "ports" above. It also needs to be EXPOSE-d
+      # in Dockerfile
+      - ADDRESS=0.0.0.0:8000
